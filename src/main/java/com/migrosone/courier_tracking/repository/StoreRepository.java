@@ -14,16 +14,16 @@ public interface StoreRepository extends JpaRepository<Store,Integer> {
 
     @Query("SELECT s.storeId "
             + " FROM Store s "
-            + " WHERE (:earthRadius * ACOS(COS(RADIANS(:latitude)) * COS(RADIANS(s.latitude))"
-            + " * COS(RADIANS(s.longitude) - RADIANS(:longitude)) + SIN(RADIANS(:latitude)) * SIN(RADIANS(s.latitude)))) < :radius"
+            + " WHERE (:earthRadius * ACOS(COS(RADIANS(:lat)) * COS(RADIANS(s.lat))"
+            + " * COS(RADIANS(s.lng) - RADIANS(:lng)) + SIN(RADIANS(:lat)) * SIN(RADIANS(s.lat)))) < :radius"
             + " AND NOT EXISTS (SELECT 1 "
                             + " FROM CourierEntrance ce "
                             + " WHERE ce.storeId = s.storeId"
                             + " AND ce.courierId = :courierId"
                             + " AND ce.entryTime BETWEEN :oneMinuteAgo AND :courierTime)")
     List<Integer> findAllStoreIdIfIsInRadius(@Param("courierId") Integer courierId ,
-                                             @Param("latitude") double latitude,
-                                             @Param("longitude") double longitude,
+                                             @Param("lat") double lat,
+                                             @Param("lng") double lng,
                                              @Param("radius") double radius,
                                              @Param("earthRadius") double earthRadius,
                                              @Param("courierTime") LocalDateTime courierTime,

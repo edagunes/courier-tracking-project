@@ -22,7 +22,7 @@ public class CourierLocation {
     private Integer courierId;
     @Id
     private LocalDateTime time;
-    private double latitude;
-    private double longitude;
+    private double lat;
+    private double lng;
 
 }

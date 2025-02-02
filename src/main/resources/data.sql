@@ -1,13 +1,5 @@
--- Mağaza Konumları (Migros Şubeleri)
-INSERT INTO STORE (store_id, name, latitude, longitude) VALUES
-(1, 'Ataşehir MMM Migros', 40.9923307, 29.1244229),
-(2, 'Novada MMM Migros', 40.986106, 29.1161293),
-(3, 'Beylikdüzü 5M Migros', 41.0066851, 28.6552262),
-(4, 'Ortaköy MMM Migros', 41.055783, 29.0210292),
-(5, 'Caddebostan MMM Migros', 40.9632463, 29.0630908);
-
 -- Kurye Konumları (Test Kuryeleri)
-INSERT INTO COURIER_LOCATION (courier_id, time, latitude, longitude) VALUES
+INSERT INTO COURIER_LOCATION (courier_id, time, lat, lng) VALUES
 (1, '2024-01-31 12:00:00', 40.9923307, 29.1244229),
 (1, '2024-01-31 12:00:30', 40.9923310, 29.1244230),
 (1, '2024-01-31 12:01:10', 40.9923400, 29.1244300),

@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/courier-tracking")
 public class CourierTrackingController {
 
-    private CourierEntranceService courierEntranceService;
-    private CourierDistanceService courierDistanceService;
+    private final CourierEntranceService courierEntranceService;
+    private final CourierDistanceService courierDistanceService;
 
     public CourierTrackingController(CourierEntranceService courierEntranceService, CourierDistanceService courierDistanceService) {
         this.courierEntranceService = courierEntranceService;
         this.courierDistanceService = courierDistanceService;
     }
 
-    @PostMapping("/courier/location")
+    @PostMapping("/courier-location")
     public ResponseEntity<String> saveNearbyCourierAndTotalDistance() {
         courierEntranceService.processLocationAndDistance();
         return ResponseEntity.ok("Nearby couriers saved");
     }
 
-    @GetMapping("/courier/{courierId}/distance") //TODO: null olursa response entity'de no content yolla
+    @GetMapping("/courier-distance/{courierId}")
     public ResponseEntity<Double> getCourierDistance(@PathVariable("courierId") Integer courierId) {
         double distance = courierDistanceService.getTotalTravelDistance(courierId);
         return ResponseEntity.ok(distance);

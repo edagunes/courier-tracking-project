@@ -13,7 +13,7 @@ public class SaveTotalDistanceInput {
 
     private Integer courierId;
     private LocalDateTime time;
-    private double latitude;
-    private double longitude;
+    private double lat;
+    private double lng;
 
 }

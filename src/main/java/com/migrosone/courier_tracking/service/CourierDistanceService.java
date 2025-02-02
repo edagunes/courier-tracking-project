@@ -7,6 +7,7 @@ import com.migrosone.courier_tracking.repository.CourierDistanceRepository;
 import com.migrosone.courier_tracking.repository.CourierLocationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 @Service
@@ -39,13 +40,16 @@ public class CourierDistanceService {
 
     private double calculateDistance(SaveTotalDistanceInput saveTotalDistanceInput, CourierLocation getLastLocationOfCourier) {
 
-        return Haversine.calculateDistance(saveTotalDistanceInput.getLatitude(), saveTotalDistanceInput.getLongitude(),
-                getLastLocationOfCourier.getLatitude(), getLastLocationOfCourier.getLongitude());
+        return Haversine.calculateDistance(saveTotalDistanceInput.getLat(), saveTotalDistanceInput.getLng(),
+                getLastLocationOfCourier.getLat(), getLastLocationOfCourier.getLng());
     }
 
     public double getTotalTravelDistance(Integer courierId) {
 
         CourierDistance courierDistance = distanceRepository.findByCourierId(courierId);
-        return Objects.nonNull(courierDistance) ? courierDistance.getTotalDistance() : 0.0;
+        if (Objects.isNull(courierDistance)) {
+            throw new NoSuchElementException("Courier not found");
+        }
+        return courierDistance.getTotalDistance();
     }
 }

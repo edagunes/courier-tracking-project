@@ -37,13 +37,13 @@ public class CourierEntranceService {
             Integer courierId = courierLocation.getCourierId();
             LocalDateTime time = courierLocation.getTime();
 
-            List<Integer> storeIds = storeRepository.findAllStoreIdIfIsInRadius(courierId, courierLocation.getLatitude(), courierLocation.getLongitude(), RADIUS, EARTH_RADIUS, time, time.minusMinutes(1));
+            List<Integer> storeIds = storeRepository.findAllStoreIdIfIsInRadius(courierId, courierLocation.getLat(), courierLocation.getLng(), RADIUS, EARTH_RADIUS, time, time.minusMinutes(1));
             storeIds.forEach(storeId -> entranceRepository.save(new CourierEntrance(storeId, courierId, time)));
 
             distanceService.saveTotalTravelDistance(SaveTotalDistanceInput.builder()
                     .courierId(courierId)
-                    .latitude(courierLocation.getLatitude())
-                    .longitude(courierLocation.getLongitude())
+                    .lat(courierLocation.getLat())
+                    .lng(courierLocation.getLng())
                     .time(time)
                     .build());
         });
