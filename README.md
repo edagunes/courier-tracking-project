@@ -9,4 +9,18 @@ This project is a Spring Boot project that tracks the movement of couriers, calc
 - **Lombok**
 - **Swagger**
 
+## Endpoints and Requests
+
+### Save Courier If Nearby and Total Distance
+```http
+POST /api/courier-tracking/courier/location
+
+### Save Courier If Nearby and Total Distance
+```http
+POST /api/courier-tracking/courier/{courierId}/distance
+Content-Type: application/json
+
+{
+    "courierId": 1
+}
 
