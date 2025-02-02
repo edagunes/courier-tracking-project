@@ -18,7 +18,7 @@ POST /api/courier-tracking/courier/location
 
 ### Get Total Distance
 ```http
-POST /api/courier-tracking/courier/{courierId}/distance
+GET /api/courier-tracking/courier/{courierId}/distance
 Content-Type: application/json
 
 {
