@@ -20,7 +20,7 @@ public class CourierTrackingController {
     @PostMapping("/courier-location")
     public ResponseEntity<String> saveNearbyCourierAndTotalDistance() {
         courierEntranceService.processLocationAndDistance();
-        return ResponseEntity.ok("Nearby couriers saved");
+        return ResponseEntity.ok("Nearby couriers and total distances saved");
     }
 
     @GetMapping("/courier-distance/{courierId}")
