@@ -25,6 +25,23 @@ Content-Type: application/json
     "courierId": 1
 }
 ```
+## Installation and Usage
+
+1. Clone the repo
+```sh
+git clone https://github.com/username/courier-tracking.git
+```
+
+2. Load Dependencies
+```sh
+mvn clean install
+```
+
+3. Run
+```sh
+mvn spring-boot:run
+```
+
 ## H2 Console
 - **URL: http://localhost:8080/h2-console**
 - **JDBC URL: jdbc:h2:mem:testdb**
