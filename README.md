@@ -14,8 +14,9 @@ This project is a Spring Boot project that tracks the movement of couriers, calc
 ### Save Courier If Nearby and Total Distance
 ```http
 POST /api/courier-tracking/courier/location
+```
 
-### Save Courier If Nearby and Total Distance
+### Get Total Distance
 ```http
 POST /api/courier-tracking/courier/{courierId}/distance
 Content-Type: application/json
@@ -23,4 +24,5 @@ Content-Type: application/json
 {
     "courierId": 1
 }
+```
 
