@@ -26,3 +26,13 @@ Content-Type: application/json
 }
 ```
 
+## Swagger
+
+You can find the endpoints using the Swagger UI.
+
+To access the Swagger UI, run the application and navigate to the following URL in your browser:
+
+```powershell
+http://localhost:8080/swagger-ui.html
+```
+
