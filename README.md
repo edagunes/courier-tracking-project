@@ -9,7 +9,7 @@ This project is a Spring Boot project that tracks the movement of couriers, calc
 - **Lombok**
 - **Swagger**
 
-## Endpoints and Requests
+## Endpoints and Example Requests
 
 ### Save Courier If Nearby and Total Distance
 ```http
