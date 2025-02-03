@@ -1,13 +1,14 @@
 package com.migrosone.courier_tracking.service;
 
+import com.migrosone.courier_tracking.dto.CourierLocationRequest;
 import com.migrosone.courier_tracking.entity.CourierEntrance;
+import com.migrosone.courier_tracking.entity.CourierLocation;
 import com.migrosone.courier_tracking.model.SaveTotalDistanceInput;
 import com.migrosone.courier_tracking.repository.CourierEntranceRepository;
 import com.migrosone.courier_tracking.repository.CourierLocationRepository;
 import com.migrosone.courier_tracking.repository.StoreRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.migrosone.courier_tracking.constant.CourierTrackingConstant.EARTH_RADIUS;
@@ -31,22 +32,29 @@ public class CourierEntranceService {
         this.distanceService = distanceService;
     }
 
-    public void processLocationAndDistance() {
+    public void processLocationAndDistance(CourierLocationRequest courierLocationRequest) {
 
-        locationRepository.findAllByOrderByTimeAsc().forEach(courierLocation -> {
-            Integer courierId = courierLocation.getCourierId();
-            LocalDateTime time = courierLocation.getTime();
+        saveCourierLocation(courierLocationRequest);
 
-            List<Integer> storeIds = storeRepository.findAllStoreIdIfIsInRadius(courierId, courierLocation.getLat(), courierLocation.getLng(), RADIUS, EARTH_RADIUS, time, time.minusMinutes(1));
-            storeIds.forEach(storeId -> entranceRepository.save(new CourierEntrance(storeId, courierId, time)));
+        List<Integer> storeIds = storeRepository.findAllStoreIdIfIsInRadius(courierLocationRequest.getCourierId(), courierLocationRequest.getLat(), courierLocationRequest.getLng(), RADIUS, EARTH_RADIUS, courierLocationRequest.getTime(), courierLocationRequest.getTime().minusMinutes(1));
+        storeIds.forEach(storeId -> entranceRepository.save(new CourierEntrance(storeId, courierLocationRequest.getCourierId(), courierLocationRequest.getTime())));
 
-            distanceService.saveTotalTravelDistance(SaveTotalDistanceInput.builder()
-                    .courierId(courierId)
-                    .lat(courierLocation.getLat())
-                    .lng(courierLocation.getLng())
-                    .time(time)
-                    .build());
-        });
+        distanceService.saveTotalTravelDistance(SaveTotalDistanceInput.builder()
+                .courierId(courierLocationRequest.getCourierId())
+                .lat(courierLocationRequest.getLat())
+                .lng(courierLocationRequest.getLng())
+                .time(courierLocationRequest.getTime())
+                .build());
 
+    }
+
+    private void saveCourierLocation(CourierLocationRequest courierLocationRequest) {
+        CourierLocation courierLocation = new CourierLocation();
+        courierLocation.setCourierId(courierLocationRequest.getCourierId());
+        courierLocation.setLat(courierLocationRequest.getLat());
+        courierLocation.setLng(courierLocationRequest.getLng());
+        courierLocation.setTime(courierLocationRequest.getTime());
+
+        locationRepository.save(courierLocation);
     }
 }

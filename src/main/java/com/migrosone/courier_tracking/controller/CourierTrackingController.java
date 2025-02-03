@@ -1,5 +1,6 @@
 package com.migrosone.courier_tracking.controller;
 
+import com.migrosone.courier_tracking.dto.CourierLocationRequest;
 import com.migrosone.courier_tracking.service.CourierDistanceService;
 import com.migrosone.courier_tracking.service.CourierEntranceService;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public class CourierTrackingController {
     }
 
     @PostMapping("/courier-location")
-    public ResponseEntity<String> saveNearbyCourierAndTotalDistance() {
-        courierEntranceService.processLocationAndDistance();
+    public ResponseEntity<String> saveNearbyCourierAndTotalDistance(CourierLocationRequest request) {
+        courierEntranceService.processLocationAndDistance(request);
         return ResponseEntity.ok("Nearby couriers and total distances saved");
     }
 

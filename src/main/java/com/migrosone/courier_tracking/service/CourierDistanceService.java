@@ -26,6 +26,7 @@ public class CourierDistanceService {
         CourierLocation getLastLocationOfCourier = locationRepository.findLastLocationOfCourier(saveTotalDistanceInput.getCourierId(), saveTotalDistanceInput.getTime());
 
         if (Objects.isNull(getLastLocationOfCourier)) {
+            distanceRepository.save(new CourierDistance(saveTotalDistanceInput.getCourierId(),0.0));
             return;
         }
 
