@@ -14,7 +14,7 @@ This project is a Spring Boot project that tracks the movement of couriers, calc
 
 ### Save Courier If Nearby and Total Distance
 ```http
-POST /api/courier-tracking//courier-location
+POST /api/courier-tracking/courier-location
 
 {
 "courierId": 3,
@@ -33,6 +33,7 @@ Content-Type: application/json
     "courierId": 1
 }
 ```
+
 ## Installation and Usage
 
 1. Clone the repo
@@ -49,6 +50,12 @@ mvn clean install
 ```sh
 mvn spring-boot:run
 ```
+
+## RabbitMQ
+
+You can check this page to installing RabbitMQ
+
+https://www.rabbitmq.com/docs/download
 
 ## H2 Console
 - **URL: http://localhost:8080/h2-console**
