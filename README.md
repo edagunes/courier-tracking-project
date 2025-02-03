@@ -5,6 +5,7 @@ This project is a Spring Boot project that tracks the movement of couriers, calc
 ## Technologies and Libraries
 - **Java 23**
 - **Spring Boot 3**
+- **RabbitMQ**
 - **H2 Database**
 - **Lombok**
 - **Swagger**
@@ -14,6 +15,13 @@ This project is a Spring Boot project that tracks the movement of couriers, calc
 ### Save Courier If Nearby and Total Distance
 ```http
 POST /api/courier-tracking//courier-location
+
+{
+"courierId": 3,
+"time": "2024-01-31T12:45:00",
+"lat": 42.0066851,
+"lng": 30.6552262
+}
 ```
 
 ### Get Total Distance
